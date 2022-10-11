@@ -12,4 +12,4 @@ install http-server
 - npm install -g http-server
 
 Run
-- npm start
+- http-server -p 3000
