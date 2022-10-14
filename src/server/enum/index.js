@@ -17,3 +17,11 @@ export const provinces = {
     NT: 'Northwest Territories',
     NU: 'Nunavut'
 }
+
+export const statusCode = {
+    success: 200,
+    unauthorized: 401,
+    internalServerError: 500,
+    badRequest: 400,
+    notFound: 404
+}

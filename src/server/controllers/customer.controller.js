@@ -3,22 +3,23 @@ import dotenv from 'dotenv'
 
 import CustomerModel from "../models/customer.model.js"
 import { userJsonReponse, userCreateUpdateJson } from '../helper/index.js'
+import { statusCode } from '../enum/index.js'
 
 dotenv.config()
 
 const getCustomers = (req, res) => {
-    CustomerModel.find({}, (err, data) => {
+    CustomerModel.getAllCustomers((err, data) => {
         if (err) {
             console.log(err)
-            res.status(200).json({
-                statusCode: 500,
+            res.status(statusCode.success).json({
+                statusCode: statusCode.internalServerError,
                 error: err
             })
             return
         }
         console.log(data)
-        res.status(200).json({
-            statusCode: 200,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.success,
             data: data?.map(d => userJsonReponse(d)) || []
         })
     })
@@ -27,25 +28,24 @@ const getCustomers = (req, res) => {
 const getCustomerByID = (req, res) => {
     const id = req.params?.id
     if (!id) {
-        res.status(200).json({
-            statusCode: 401,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.badRequest,
             error: { message: 'Invalid User Id' }
         })
         return
     }
-
-    CustomerModel.findById(id, (err, data) => {
+    CustomerModel.getCustomerById(id, (err, data) => {
         if (err) {
             console.log(err)
-            res.status(200).json({
-                statusCode: 500,
+            res.status(statusCode.success).json({
+                statusCode: statusCode.internalServerError,
                 error: err
             })
             return
         }
         console.log(data)
-        res.status(200).json({
-            statusCode: 200,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.success,
             data: userJsonReponse(data) || {}
         })
     })
@@ -54,28 +54,29 @@ const getCustomerByID = (req, res) => {
 const createCustomer = (req, res) => {
     const customer = req.body
     if (!customer) {
-        res.status(200).json({
-            statusCode: 401,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.badRequest,
             error: { message: 'Invalid customer' }
         })
         return
     }
 
-    CustomerModel.create(userCreateUpdateJson(customer), (err, data) => {
+    CustomerModel.createCustomer(userCreateUpdateJson(customer), (err, data) => {
         if (err) {
             console.log(err)
-            res.status(200).json({
-                statusCode: 401,
+            res.status(statusCode.success).json({
+                statusCode: statusCode.badRequest,
                 error: err
             })
             return
         }
         console.log(data)
-        let token = jwt.sign({ data: `${data._id}-${data.email}` }, process.env.SECRET_JWT_TOKEN, {
+        const secret = process.env.SECRET_JWT_TOKEN
+        let token = jwt.sign({ data: `${data._id}-${data.email}` }, secret, {
             expiresIn: process.env.TOKEN_EXPIRED_TIME
         })
-        res.status(200).json({
-            statusCode: 200,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.success,
             data: userJsonReponse(data) || {},
             token
         })
@@ -87,24 +88,24 @@ const updateCustomer = (req, res) => {
     const customer = req.body
 
     if (!customer || !id) {
-        res.status(200).json({
-            statusCode: 401,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.badRequest,
             error: { message: 'Invalid Customer' }
         })
         return
     }
-    CustomerModel.findByIdAndUpdate(id, userCreateUpdateJson(customer), (err, data) => {
+    CustomerModel.updateCustomer(id, userCreateUpdateJson(customer), (err, data) => {
         if (err) {
             console.log(err)
-            res.status(200).json({
-                statusCode: 500,
+            res.status(statusCode.success).json({
+                statusCode: statusCode.internalServerError,
                 error: err
             })
             return
         }
         console.log(data)
-        res.status(200).json({
-            statusCode: 200,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.success,
             message: 'Update customer successfully!',
             data: userJsonReponse(customer) || {}
         })
@@ -115,25 +116,25 @@ const updateCustomer = (req, res) => {
 const deleteCustomer = (req, res) => {
     const id = req.params?.id
     if (!id) {
-        res.status(200).json({
-            statusCode: 401,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.badRequest,
             error: { message: 'Invalid User Id' }
         })
         return
     }
 
-    CustomerModel.findByIdAndDelete(id, (err, data) => {
+    CustomerModel.deleteCustomer(id, (err, data) => {
         if (err) {
             console.log(err)
-            res.status(200).json({
-                statusCode: 500,
+            res.status(statusCode.success).json({
+                statusCode: statusCode.internalServerError,
                 error: err
             })
             return
         }
         console.log(data)
-        res.status(200).json({
-            statusCode: 200,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.success,
             message: 'Delete the customer successfully!'
         })
     })
@@ -142,27 +143,28 @@ const deleteCustomer = (req, res) => {
 const login = (req, res) => {
     const { email, password } = req.body
 
-    CustomerModel.findOne({ email, password }, (err, data) => {
+    CustomerModel.findOneCustomer({ email, password }, (err, data) => {
         if (err) {
             console.log(err)
-            res.status(200).json({
-                statusCode: 500,
+            res.status(statusCode.success).json({
+                statusCode: statusCode.internalServerError,
                 error: err
             })
             return
         }
         if (!data) {
-            res.status(200).json({
-                statusCode: 404,
+            res.status(statusCode.success).json({
+                statusCode: statusCode.notFound,
                 message: 'Invalid Email or Password!'
             })
             return
         }
-        let token = jwt.sign({ data: `${data._id}-${data.email}` }, process.env.SECRET_JWT_TOKEN, {
+        const secret = process.env.SECRET_JWT_TOKEN
+        let token = jwt.sign({ data: `${data._id}-${data.email}` }, secret, {
             expiresIn: process.env.TOKEN_EXPIRED_TIME
         })
-        res.status(200).json({
-            statusCode: 200,
+        res.status(statusCode.success).json({
+            statusCode: statusCode.success,
             data: userJsonReponse(data) || {},
             token: token || null
         })
