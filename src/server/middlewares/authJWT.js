@@ -31,4 +31,4 @@ const verifyToken = (req, res, next) => {
 
 export {
     verifyToken
-};
+}
