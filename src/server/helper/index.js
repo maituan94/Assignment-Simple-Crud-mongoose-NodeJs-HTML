@@ -11,7 +11,8 @@ export const userJsonReponse = (data) => {
         address: data.address,
         state: data.state,
         isSendNews: data.isSendNews,
-        question: data.question
+        question: data.question,
+        dateOfBirth: data.dateOfBirth
     }
 }
 
@@ -29,6 +30,7 @@ export const userCreateUpdateJson = (data) => {
         password: data.password,
         isSendNews: data.isSendNews,
         question: data.question,
-        phone: data.phone
+        phone: data.phone,
+        dateOfBirth: data.dateOfBirth
     }
 }

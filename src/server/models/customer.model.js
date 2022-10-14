@@ -2,8 +2,26 @@ import mongoose from "mongoose";
 import { genders, provinces } from "../enum/index.js";
 
 const customerSchema = mongoose.Schema({
-    firstName: { type: String, required: [true, 'First name is required'] },
-    lastName: { type: String, required: [true, 'Last name is required'] },
+    firstName: {
+        type: String,
+        validate: {
+            validator: function (v) {
+                return v.length > 2;
+            },
+            message: () => 'First Name must be more than 2 characters'
+        },
+        required: [true, 'First name is required']
+    },
+    lastName: {
+        type: String,
+        validate: {
+            validator: function (v) {
+                return v.length > 2;
+            },
+            message: () => 'Last Name must be more than 2 characters'
+        },
+        required: [true, 'Last name is required']
+    },
     gender: { type: String, enum: genders, required: true },
     phone: {
         type: String, validate: {
@@ -53,6 +71,9 @@ const customerSchema = mongoose.Schema({
     },
     question: {
         type: String
+    },
+    dateOfBirth: {
+        type: Date
     }
 })
 
