@@ -7,7 +7,7 @@ import { userJsonReponse, userCreateUpdateJson } from '../helper/index.js'
 dotenv.config()
 
 const getCustomers = (req, res) => {
-    CustomerModel.find({}, function (err, data) {
+    CustomerModel.find({}, (err, data) => {
         if (err) {
             console.log(err)
             res.status(200).json({
@@ -34,7 +34,7 @@ const getCustomerByID = (req, res) => {
         return
     }
 
-    CustomerModel.findById(id, function (err, data) {
+    CustomerModel.findById(id, (err, data) => {
         if (err) {
             console.log(err)
             res.status(200).json({
@@ -56,12 +56,12 @@ const createCustomer = (req, res) => {
     if (!customer) {
         res.status(200).json({
             statusCode: 401,
-            error: { message: 'Invalid question' }
+            error: { message: 'Invalid customer' }
         })
         return
     }
 
-    CustomerModel.create(userCreateUpdateJson(customer), function (err, data) {
+    CustomerModel.create(userCreateUpdateJson(customer), (err, data) => {
         if (err) {
             console.log(err)
             res.status(200).json({
@@ -69,31 +69,31 @@ const createCustomer = (req, res) => {
                 error: err
             })
             return
-        } else {
-            console.log(data)
-            let token = jwt.sign({ data: `${data._id}-${data.email}` }, process.env.SECRET_JWT_TOKEN, {
-                expiresIn: process.env.TOKEN_EXPIRED_TIME
-            })
-            res.status(200).json({
-                statusCode: 200,
-                data: userJsonReponse(data) || {},
-                token
-            })
         }
+        console.log(data)
+        let token = jwt.sign({ data: `${data._id}-${data.email}` }, process.env.SECRET_JWT_TOKEN, {
+            expiresIn: process.env.TOKEN_EXPIRED_TIME
+        })
+        res.status(200).json({
+            statusCode: 200,
+            data: userJsonReponse(data) || {},
+            token
+        })
     })
 }
 
 const updateCustomer = (req, res) => {
+    const { id } = req.params
     const customer = req.body
 
-    if (!customer || !customer.id) {
+    if (!customer || !id) {
         res.status(200).json({
             statusCode: 401,
             error: { message: 'Invalid Customer' }
         })
         return
     }
-    CustomerModel.findByIdAndUpdate(customer.id, userCreateUpdateJson(customer), function (err, data) {
+    CustomerModel.findByIdAndUpdate(id, userCreateUpdateJson(customer), (err, data) => {
         if (err) {
             console.log(err)
             res.status(200).json({
@@ -122,8 +122,8 @@ const deleteCustomer = (req, res) => {
         return
     }
 
-    CustomerModel.findByIdAndDelete(id, function (err, data) {
-        if(err) {
+    CustomerModel.findByIdAndDelete(id, (err, data) => {
+        if (err) {
             console.log(err)
             res.status(200).json({
                 statusCode: 500,
@@ -132,17 +132,17 @@ const deleteCustomer = (req, res) => {
             return
         }
         console.log(data)
-            res.status(200).json({
-                statusCode: 200,
-                message: 'Delete the customer successfully!'
-            })
+        res.status(200).json({
+            statusCode: 200,
+            message: 'Delete the customer successfully!'
+        })
     })
 }
 
 const login = (req, res) => {
     const { email, password } = req.body
 
-    CustomerModel.findOne({ email, password }, function (err, data) {
+    CustomerModel.findOne({ email, password }, (err, data) => {
         if (err) {
             console.log(err)
             res.status(200).json({
@@ -150,23 +150,22 @@ const login = (req, res) => {
                 error: err
             })
             return
-        } else {
-            if (!data) {
-                res.status(200).json({
-                    statusCode: 404,
-                    message: 'Invalid Email or Password!'
-                })
-                return
-            }
-            let token = jwt.sign({ data: `${data._id}-${data.email}` }, process.env.SECRET_JWT_TOKEN, {
-                expiresIn: process.env.TOKEN_EXPIRED_TIME
-            })
-            res.status(200).json({
-                statusCode: 200,
-                data: userJsonReponse(data) || {},
-                token: token || null
-            })
         }
+        if (!data) {
+            res.status(200).json({
+                statusCode: 404,
+                message: 'Invalid Email or Password!'
+            })
+            return
+        }
+        let token = jwt.sign({ data: `${data._id}-${data.email}` }, process.env.SECRET_JWT_TOKEN, {
+            expiresIn: process.env.TOKEN_EXPIRED_TIME
+        })
+        res.status(200).json({
+            statusCode: 200,
+            data: userJsonReponse(data) || {},
+            token: token || null
+        })
     })
 }
 

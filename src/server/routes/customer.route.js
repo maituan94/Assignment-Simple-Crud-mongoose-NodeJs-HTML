@@ -12,7 +12,7 @@ CustomerRouter.get('/customers', [verifyToken], getCustomers);
 
 //create & update customer
 CustomerRouter.post('/customer', createCustomer)
-CustomerRouter.put('/customer', [verifyToken], updateCustomer)
+CustomerRouter.put('/customer/:id', [verifyToken], updateCustomer)
 
 //get customer by Id and delete
 CustomerRouter.get('/customer/:id', [verifyToken], getCustomerByID)
