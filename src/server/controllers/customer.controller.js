@@ -5,7 +5,7 @@ import {
     getAllCustomers,
     getCustomerById,
     createCustomer as createNewCustomer,
-    updateCustomer as UpdateCustomerById,
+    updateCustomer as updateCustomerById,
     deleteCustomer as deleteCustomerById,
     findOneCustomer
 } from "../models/customer.model.js"
@@ -102,7 +102,7 @@ const updateCustomer = (req, res) => {
         })
         return
     }
-    UpdateCustomerById(id, userCreateUpdateJson(customer), (err, data) => {
+    updateCustomerById(id, userCreateUpdateJson(customer), (err, data) => {
         if (err) {
             console.log(err)
             res.status(statusCode.success).json({

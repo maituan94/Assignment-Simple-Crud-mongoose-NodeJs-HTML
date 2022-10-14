@@ -79,50 +79,39 @@ const customerSchema = mongoose.Schema({
 
 const customerModel = mongoose.model('customer', customerSchema, 'Customer')
 
-const getAllCustomers = (callback) => {
+export const getAllCustomers = (callback) => {
     if (typeof callback !== 'function') throw new Error('callback is not a function')
     customerModel.find({}, callback)
 }
 
-const getCustomerById = (id, callback) => {
+export const getCustomerById = (id, callback) => {
     if (!id) throw new Error('Id is not defined')
     if (typeof callback !== 'function') throw new Error('callback is not a function')
     customerModel.findById(id, callback)
 }
 
-const createCustomer = (data, callback) => {
+export const createCustomer = (data, callback) => {
     if (!data) throw new Error('Data is not defined')
     if (typeof callback !== 'function') throw new Error('callback is not a function')
     customerModel.create(data, callback)
 }
 
-const updateCustomer = (id, data, callback) => {
+export const updateCustomer = (id, data, callback) => {
     if (!data || !id) throw new Error(' Id or data is not defined')
     if (typeof callback !== 'function') throw new Error('callback is not a function')
 
     customerModel.findByIdAndUpdate(id, data, callback)
 }
 
-const deleteCustomer = (id, callback) => {
+export const deleteCustomer = (id, callback) => {
     if (!id) throw new Error(' Id is not defined')
     if (typeof callback !== 'function') throw new Error('callback is not a function')
 
     customerModel.findByIdAndDelete(id, callback)
 }
 
-const findOneCustomer = (filter, callback) => {
+export const findOneCustomer = (filter, callback) => {
     if (typeof callback !== 'function') throw new Error('callback is not a function')
 
     customerModel.findOne(filter, callback)
 }
-
-const CustomerModel =  {
-    getAllCustomers,
-    getCustomerById,
-    createCustomer,
-    updateCustomer,
-    deleteCustomer,
-    findOneCustomer
-}
-
-export default CustomerModel;
