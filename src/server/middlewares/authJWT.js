@@ -16,10 +16,11 @@ const verifyToken = (req, res, next) => {
     jwt.verify(token, process.env.SECRET_JWT_TOKEN, (err, decoded) => {
         if (err) {
             console.log(err)
-            return res.status(200).json({
+            res.status(200).json({
                 statusCode: 401,
                 error: { message: "Unauthorized" }
             });
+            return
         }
         req.user = decoded.data;
         next();
