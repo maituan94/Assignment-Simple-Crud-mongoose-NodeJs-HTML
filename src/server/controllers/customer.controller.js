@@ -1,14 +1,21 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 
-import CustomerModel from "../models/customer.model.js"
+import {
+    getAllCustomers,
+    getCustomerById,
+    createCustomer as createNewCustomer,
+    updateCustomer as UpdateCustomerById,
+    deleteCustomer as deleteCustomerById,
+    findOneCustomer
+} from "../models/customer.model.js"
 import { userJsonReponse, userCreateUpdateJson } from '../helper/index.js'
 import { statusCode } from '../enum/index.js'
 
 dotenv.config()
 
 const getCustomers = (req, res) => {
-    CustomerModel.getAllCustomers((err, data) => {
+    getAllCustomers((err, data) => {
         if (err) {
             console.log(err)
             res.status(statusCode.success).json({
@@ -34,7 +41,7 @@ const getCustomerByID = (req, res) => {
         })
         return
     }
-    CustomerModel.getCustomerById(id, (err, data) => {
+    getCustomerById(id, (err, data) => {
         if (err) {
             console.log(err)
             res.status(statusCode.success).json({
@@ -61,7 +68,7 @@ const createCustomer = (req, res) => {
         return
     }
 
-    CustomerModel.createCustomer(userCreateUpdateJson(customer), (err, data) => {
+    createNewCustomer(userCreateUpdateJson(customer), (err, data) => {
         if (err) {
             console.log(err)
             res.status(statusCode.success).json({
@@ -95,7 +102,7 @@ const updateCustomer = (req, res) => {
         })
         return
     }
-    CustomerModel.updateCustomer(id, userCreateUpdateJson(customer), (err, data) => {
+    UpdateCustomerById(id, userCreateUpdateJson(customer), (err, data) => {
         if (err) {
             console.log(err)
             res.status(statusCode.success).json({
@@ -124,7 +131,7 @@ const deleteCustomer = (req, res) => {
         return
     }
 
-    CustomerModel.deleteCustomer(id, (err, data) => {
+    deleteCustomerById(id, (err, data) => {
         if (err) {
             console.log(err)
             res.status(statusCode.success).json({
@@ -144,7 +151,7 @@ const deleteCustomer = (req, res) => {
 const login = (req, res) => {
     const { email, password } = req.body
 
-    CustomerModel.findOneCustomer({ email, password }, (err, data) => {
+    findOneCustomer({ email, password }, (err, data) => {
         if (err) {
             console.log(err)
             res.status(statusCode.success).json({
