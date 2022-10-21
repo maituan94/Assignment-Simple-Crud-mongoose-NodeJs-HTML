@@ -1,0 +1,53 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script type="module" src="../../js/validator.js"></script>
+    <script defer type="module"src="./contactForm.js"></script>
+
+    <title>Form Validation Example</title>
+  </head>
+  <body>
+    <h1>Form Validation Using JavaScript - Example</h1>
+
+    <form 
+      id="contactForm"
+      action="#"
+      data-contact-form
+    >
+      <div>
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username" autofocus required />
+      </div>
+
+      <div>
+        <label for="first-password">Password: </label>
+        <input
+          type="password"
+          name="firstPassword"
+          id="first-password"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="second-password">Confirm Password: </label>
+        <input
+          type="password"
+          name="secondPassword"
+          id="second-password"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+
+    <div id="show-error">No validation error yet!</div>
+  </body>
+</html>
