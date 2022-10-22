@@ -1,7 +1,7 @@
-import Validator from '../../js/validator.js'
+import Validator from '../../js/validator/validator.js'
 
 const form = document.getElementById('contactForm');
-const selector = 'data-contact-form' // it should comes from from data-attribute
+const selector = 'contact-form' // It should comes from from data-attribute
 
 const handleOnChange = (event) => {
   event.preventDefault();
@@ -9,7 +9,7 @@ const handleOnChange = (event) => {
 }
 
 const handleOnSubmit = () => {
-  alert('enter to handleOnSubmit');
+  alert('Make a call to backend: POST, UPDATE, DELETE, etc');
 }
 
 new Validator(form, selector, {

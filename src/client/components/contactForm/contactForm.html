@@ -1,53 +1,129 @@
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <script type="module" src="../../js/validator.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- @TODO Move this scripts out using a preprocessor -->
+    <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
     <script defer type="module"src="./contactForm.js"></script>
 
-    <title>Form Validation Example</title>
+    <title>EXAMPLE OF FORM WITH VALIDATIONS</title>
   </head>
-  <body>
-    <h1>Form Validation Using JavaScript - Example</h1>
+  <body class="antialiased font-sans bg-gray-200 overflow-hidden">
+    
+    <div class="">
+      <div class="bg-gray-100">
+        <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
+          <div class="mx-auto max-w-4xl">
 
-    <form 
-      id="contactForm"
-      action="#"
-      data-contact-form
-    >
-      <div>
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username" autofocus required />
+            <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Contact Form</h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details.</p>
+              </div>
+              <div class="border-t border-gray-200">
+
+                <div class="px-4 py-5">
+                  <form 
+                    id="contactForm"
+                    action="#"
+                    data-contact-form
+                  >
+                    <!-- Create first name input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="col-span-6 sm:col-span-3">
+                        <label
+                          for="first-name" 
+                          class="mb-1 block text-sm font-medium text-gray-700"
+                        >
+                          First name:
+                        </label>
+                        <input 
+                          id="custFname" 
+                          type="text" 
+                          name="custFname"
+                          class="mb-1 w-1/2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Enter your first name" min="2"
+                          required
+                          data-contact-form-error-id="contactErrorFirstName"
+                        />
+                        <div
+                          id="contactErrorFirstName"
+                          class="text-red-500 d-flex flex-column"
+                        >
+                          <small data-contact-form-error="required" hidden>This field is required</small>
+                          <small data-contact-form-error="min" hidden>The min lenght is 2</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Create last name input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="col-span-6 sm:col-span-3">
+                        <label for="last-name" class="mb-1 block text-sm font-medium text-gray-700">
+                          Last name:
+                        </label>
+                        <input
+                          id="custLname" 
+                          type="text" 
+                          name="custLname"
+                          class="mb-1 w-1/2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Enter your last name"
+                          min="2"
+                          required
+                          data-contact-form-error-id="contactErrorLastName" />
+                        <div 
+                          id="contactErrorLastName"
+                          class="text-red-500 d-flex flex-column"
+                        >
+                          <small data-contact-form-error="required" hidden>This field is required</small>
+                          <small data-contact-form-error="min" hidden>The min lenght is 2</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Create email input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="col-span-6 sm:col-span-3">
+                        <label for="last-name" class="mb-1 block text-sm font-medium text-gray-700">
+                          Email:
+                        </label>
+                        <input
+                          id="custEmail" 
+                          type="text" 
+                          name="custEmail"
+                          class="mb-1 w-1/2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Enter your email"
+                          pattern=".+\@.+\..+"
+                          data-contact-form-error-id="contactErrorEmail" />
+                        <div 
+                          id="contactErrorEmail"
+                          class="text-red-500 d-flex flex-column"
+                        >
+                          <small data-contact-form-error="pattern" hidden>Please insert a valid email</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Submit button -->
+                    <div class="bg-gray-50 px-4 py-3 text-center sm:px-6">
+                      <button 
+                        type="submit"
+                        class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                          Submit
+                      </button>
+                    </div>
+
+                  </form>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div>
-        <label for="first-password">Password: </label>
-        <input
-          type="password"
-          name="firstPassword"
-          id="first-password"
-          required
-        />
-      </div>
-
-      <div>
-        <label for="second-password">Confirm Password: </label>
-        <input
-          type="password"
-          name="secondPassword"
-          id="second-password"
-          required
-        />
-      </div>
-
-      <button
-        type="submit"
-      >
-        Submit
-      </button>
-    </form>
-
-    <div id="show-error">No validation error yet!</div>
   </body>
 </html>
