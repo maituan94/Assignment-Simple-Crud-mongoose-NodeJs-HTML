@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { genders, provinces } from "../enum/index.js";
 
+/* Defining the schema for the customer model. */
 const customerSchema = mongoose.Schema({
     firstName: {
         type: String,
@@ -36,7 +37,7 @@ const customerSchema = mongoose.Schema({
     email: {
         type: String, validate: {
             validator: function (v) {
-                return /.+\@.+\..+/.test(v);
+                return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(v);
             },
             message: props => `${props.value} is not a valid email`
         },
