@@ -23,13 +23,12 @@ const customerElements = [
       label: 'First name: ',
       type: 'text',
       isRequired: true,
-      pattern: '',
+      pattern: '^[A-Za-z][A-Za-z0-9 ]+$',
       placeholder: 'Enter your first name',
-      min: 2,
       idError: 'contactErrorFirstName',
       errorMessage: {
+        pattern: "First name must be at least 2 characters and not start with number or special characters",
         required: "This field is required",
-        min: "The min length is 2"
       }
     },
     {
@@ -37,13 +36,13 @@ const customerElements = [
       label: 'Last name: ',
       type: 'text',
       isRequired: true,
-      pattern: '',
+      pattern: '^[A-Za-z][A-Za-z0-9 ]+$',
       placeholder: 'Enter your last name',
       min: 2,
       idError: 'contactErrorLastName',
       errorMessage: {
+        pattern: "Last name must be at least 2 characters and not start with number or special characters",
         required: "This field is required",
-        min: "The min length is 2"
       }
     }
   ],

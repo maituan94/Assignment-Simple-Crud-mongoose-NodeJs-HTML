@@ -7,9 +7,9 @@ const customerSchema = mongoose.Schema({
         type: String,
         validate: {
             validator: function (v) {
-                return v.length > 2;
+                return /^[A-Za-z][A-Za-z0-9 ]+$/.test(v);
             },
-            message: () => 'First Name must be more than 2 characters'
+            message: () => 'First Name must be more than 2 characters and not start with number or special characters'
         },
         required: [true, 'First name is required']
     },
@@ -17,9 +17,9 @@ const customerSchema = mongoose.Schema({
         type: String,
         validate: {
             validator: function (v) {
-                return v.length > 2;
+                return /^[A-Za-z][A-Za-z0-9 ]+$/.test(v);
             },
-            message: () => 'Last Name must be more than 2 characters'
+            message: () => 'Last Name must be more than 2 characters and not start with number or special characters'
         },
         required: [true, 'Last name is required']
     },
