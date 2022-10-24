@@ -83,7 +83,7 @@ const customerElements = [
       label: 'Password',
       type: 'password',
       isRequired: true,
-      pattern: "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,}$",
+      pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$",
       placeholder: 'Please enter password',
       idError: 'contactErrorPassword',
       errorMessage: {

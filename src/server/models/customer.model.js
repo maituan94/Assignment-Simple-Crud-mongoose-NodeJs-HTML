@@ -37,7 +37,7 @@ const customerSchema = mongoose.Schema({
     email: {
         type: String, validate: {
             validator: function (v) {
-                return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(v);
+                return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/.test(v);
             },
             message: props => `${props.value} is not a valid email`
         },
