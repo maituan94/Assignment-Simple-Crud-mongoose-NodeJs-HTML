@@ -1,0 +1,1 @@
+export const backgroundInputColor = "#fde68a";
