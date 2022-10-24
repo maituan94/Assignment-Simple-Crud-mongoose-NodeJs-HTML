@@ -20,7 +20,7 @@ const customerElements = [
   [
     {
       id: 'custFname',
-      label: 'First name: ',
+      label: 'First name',
       type: 'text',
       isRequired: true,
       pattern: '^[A-Za-z][A-Za-z0-9 ]+$',
@@ -33,7 +33,7 @@ const customerElements = [
     },
     {
       id: 'custLname',
-      label: 'Last name: ',
+      label: 'Last name',
       type: 'text',
       isRequired: true,
       pattern: '^[A-Za-z][A-Za-z0-9 ]+$',
@@ -49,7 +49,7 @@ const customerElements = [
   [
     {
       id: 'custEmail',
-      label: 'Email: ',
+      label: 'Email',
       type: 'text',
       isRequired: true,
       pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$",
@@ -64,7 +64,7 @@ const customerElements = [
   [
     {
       id: 'custPhone',
-      label: 'Phone number: ',
+      label: 'Phone number',
       type: 'text',
       isRequired: true,
       pattern: "^\\+[0-9]{1,3}\\([0-9]{3}\\)[0-9]{3}-[0-9]{4}$",
@@ -109,20 +109,20 @@ const customerElements = [
       id: 'custAddress',
       label: 'Home address',
       type: 'text',
-      isRequired: true,
+      isRequired: false,
       pattern: "",
       placeholder: 'Please enter home address',
-      idError: '',
+      idError: 'contactErrorAddress',
       errorMessage: {}
     },
     {
       id: 'custHomeNumber',
       label: 'Home Number',
       type: 'text',
-      isRequired: true,
+      isRequired: false,
       pattern: "",
       placeholder: 'Please enter home number',
-      idError: '',
+      idError: 'contactErrorHomeNumber',
       errorMessage: {}
     },
     {
@@ -132,7 +132,7 @@ const customerElements = [
       isRequired: false,
       pattern: "",
       placeholder: '',
-      idError: '',
+      idError: 'contactErrorState',
       errorMessage: {},
       options: provinces
     }
@@ -145,7 +145,7 @@ const customerElements = [
       isRequired: false,
       pattern: '',
       placeholder: '',
-      idError: '',
+      idError: 'contactErrorGender',
       errorMessage: {},
       options: [
         'male', 'female', 'others'
@@ -160,7 +160,7 @@ const customerElements = [
       isRequired: true,
       pattern: '',
       placeholder: 'Enter your question',
-      idError: '',
+      idError: 'contactErrorQuestion',
       errorMessage: {},
       rows: '3'
     }
@@ -173,7 +173,7 @@ const customerElements = [
       isRequired: false,
       pattern: '',
       placeholder: '',
-      idError: '',
+      idError: 'contactErrorSendNews',
       errorMessage: {}
     }
   ]
@@ -187,11 +187,11 @@ const customerElements = [
 const renderFormElements = (form) => {
   let innerForm = ''
   customerElements.forEach((element) => {
-      innerForm += `<div class="grid grid-cols-${element.length} gap-4">`
-      element.forEach((comp) => {
-        innerForm += renderComponent(comp)
-      })
-      innerForm += `</div>`
+    innerForm += `<div class="grid grid-cols-${element.length} gap-4">`
+    element.forEach((comp) => {
+      innerForm += renderComponent(comp)
+    })
+    innerForm += `</div>`
   })
 
   innerForm += `<!-- Submit button -->

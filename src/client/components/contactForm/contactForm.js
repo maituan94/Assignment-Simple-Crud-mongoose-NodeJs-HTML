@@ -12,7 +12,10 @@ window.onload = () => {
   }
 
   const handleOnSubmit = () => {
-    alert('Make a call to backend: POST, UPDATE, DELETE, etc');
+    const formData = new FormData(form);
+    const body = Object.fromEntries(formData)
+    console.log({ body }); // @TODO Remove this conosle after to connect with data base
+    alert(`Make a call to backend: POST, UPDATE, DELETE, etc, ${JSON.stringify(body)}`);
   }
 
   new Validator(form, selector, {
