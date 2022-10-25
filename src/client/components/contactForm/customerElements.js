@@ -87,7 +87,8 @@ const customerElements = [
       idError: 'contactErrorPassword',
       errorMessage: {
         required: "This field is required",
-        pattern: "Please insert a valid password"
+        pattern: "Please insert a valid password",
+        match: "Passwords do not match"
       }
     },
     {
@@ -100,7 +101,8 @@ const customerElements = [
       idError: 'contactErrorConfirmPassword',
       errorMessage: {
         required: "This field is required",
-        pattern: "Please insert a valid password"
+        pattern: "Please insert a valid password",
+        match: "Passwords do not match"
       }
     }
   ],

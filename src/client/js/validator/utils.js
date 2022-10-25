@@ -29,3 +29,15 @@ export const invalidMax = (valueStr, maxStr, type) => {
     return !value.isNaN && !max.isNaN && value > max
   }
 }
+
+export const passwordNotMatch = (valueStr, type) => {
+  const pass1 = document.getElementById('custPassword').value
+  const pass2 = document.getElementById('custConfirmPassword').value
+  if (type === 'password'){
+    if (valueStr !== pass1 || valueStr !== pass2){
+      return true
+    } else {
+      return false
+    }
+  }
+}

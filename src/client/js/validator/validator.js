@@ -1,4 +1,4 @@
-import { invalidPattern, invalidMin } from "./utils.js";
+import { invalidPattern, invalidMin, passwordNotMatch } from "./utils.js";
 import { backgroundInputColor } from "../colors.js"
 
 function Validator(form, selector = "validator", options = {}) {
@@ -21,6 +21,7 @@ function Validator(form, selector = "validator", options = {}) {
     MIN: "min",
     MAX: "max",
     MAX_LENGTH: "max-length",
+    MATCH: "match",
   };
 
   const getErrorElementByType = (el, type) => {
@@ -54,6 +55,8 @@ function Validator(form, selector = "validator", options = {}) {
     } else if (max && invalidMax(value, max, type)) {
       // Validate maximum value
       return getErrorElementByType(el, ATTR.MAX);
+    } else if (passwordNotMatch(value, type)){
+      return getErrorElementByType(el, ATTR.MATCH);
     }
   };
 
