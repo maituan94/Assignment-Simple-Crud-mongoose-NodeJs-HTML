@@ -1,5 +1,11 @@
-import { invalidPattern, invalidMin, passwordNotMatch } from "./utils.js";
 import { backgroundInputColor } from "../colors.js"
+import {
+  invalidPattern,
+  invalidMin,
+  invalidMax,
+  passwordNotMatch,
+} from './utils.js'
+
 
 function Validator(form, selector = "validator", options = {}) {
   // Use of data selectors to update errors
@@ -51,11 +57,11 @@ function Validator(form, selector = "validator", options = {}) {
       return getErrorElementByType(el, ATTR.PATTERN);
     } else if (min && invalidMin(value, min, type)) {
       // Validate minimum value
-      return getErrorElementByType(el, ATTR.MIN);
+      return getErrorElementByType(el, ATTR.MIN)
     } else if (max && invalidMax(value, max, type)) {
       // Validate maximum value
       return getErrorElementByType(el, ATTR.MAX);
-    } else if (passwordNotMatch(value, type)){
+    } else if (passwordNotMatch(value, type)) {
       return getErrorElementByType(el, ATTR.MATCH);
     }
   };

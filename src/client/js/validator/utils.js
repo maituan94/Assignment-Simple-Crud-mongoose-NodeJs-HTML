@@ -17,27 +17,32 @@ export const invalidMin = (valueStr, minStr, type) => {
 }
 
 export const invalidMax = (valueStr, maxStr, type) => {
+
   if (type === 'date') {
     const date = new Date(valueStr)
     const maxDate = new Date(maxStr)
 
     return date > maxDate
-  } else {
-    const value = valueStr.length
-    const max = parseFloat(maxStr, 10)
-
-    return !value.isNaN && !max.isNaN && value > max
   }
+
+  return date < maxDate
 }
 
 export const passwordNotMatch = (valueStr, type) => {
-  const pass1 = document.getElementById('custPassword').value
-  const pass2 = document.getElementById('custConfirmPassword').value
-  if (type === 'password'){
-    if (valueStr !== pass1 || valueStr !== pass2){
+  const pass1 = document.getElementById('password').value
+  const pass2 = document.getElementById('confirmPassword').value
+  if (type === 'password') {
+    if (valueStr !== pass1 || valueStr !== pass2) {
       return true
     } else {
       return false
     }
   }
 }
+
+export const getDateFormat = () => {
+  const date = new Date()
+  // @TODO Check the max value for date input
+  date.setDate(date.getDate() - 1)
+  return date.toLocaleDateString().split('T')[0]
+} 
