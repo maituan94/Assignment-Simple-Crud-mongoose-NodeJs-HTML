@@ -51,6 +51,8 @@ window.onload = () => {
       .then(checkData)
       .then(hideSpinner)
       .catch(showErrorMessage)
+
+    window.location.href = '../welcomePage/welcome.html';
   }
 
   const errorHandler = (response) => {
