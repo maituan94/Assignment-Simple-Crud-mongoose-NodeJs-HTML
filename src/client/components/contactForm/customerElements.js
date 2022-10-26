@@ -52,7 +52,7 @@ const customerElements = [
       label: 'Email',
       type: 'text',
       isRequired: true,
-      pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$",
+      pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z]+)*$",
       placeholder: 'Enter your email',
       idError: 'contactErrorEmail',
       errorMessage: {

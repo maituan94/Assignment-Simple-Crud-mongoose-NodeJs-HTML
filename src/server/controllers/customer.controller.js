@@ -10,7 +10,7 @@ import {
     findOneCustomer
 } from "../models/customer.model.js"
 import { userJsonReponse, userCreateUpdateJson } from '../helper/index.js'
-import { statusCode } from '../enum/index.js'
+import { statusCode, duplicatedCode } from '../enum/index.js'
 
 dotenv.config()
 
@@ -71,6 +71,9 @@ const createCustomer = (req, res) => {
     createNewCustomer(userCreateUpdateJson(customer), (err, data) => {
         if (err) {
             console.log(err)
+            if (err.code === duplicatedCode) {
+                err = {...err, message: `${Object.keys(err.keyPattern)?.join(", ")} already existed`}
+            }
             res.status(statusCode.success).json({
                 statusCode: statusCode.badRequest,
                 error: err
@@ -105,6 +108,9 @@ const updateCustomer = (req, res) => {
     updateCustomerById(id, userCreateUpdateJson(customer), (err, data) => {
         if (err) {
             console.log(err)
+            if (err.code === duplicatedCode) {
+                err = {...err, message: `${Object.keys(err.keyPattern)?.join(", ")} already existed`}
+            }
             res.status(statusCode.success).json({
                 statusCode: statusCode.internalServerError,
                 error: err
