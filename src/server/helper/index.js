@@ -1,3 +1,11 @@
+/**
+ * It takes a user object and returns a new object with only the properties we want to expose to the
+ * client
+ * @param data - The data that you want to convert to JSON.
+ * @returns An object with the following properties:
+ * id, firstName, lastName, gender, phone, email, homeNumber, address, state, isSendNews, question,
+ * dateOfBirth
+ */
 export const userJsonReponse = (data) => {
     if (!data) return
     return {
@@ -16,6 +24,10 @@ export const userJsonReponse = (data) => {
     }
 }
 
+/**
+ * It takes a data object and returns a new object with the same properties but with different names
+ * @param data - The data object that is passed to the function.
+ */
 export const userCreateUpdateJson = (data) => {
     if (!data) return
     return {
