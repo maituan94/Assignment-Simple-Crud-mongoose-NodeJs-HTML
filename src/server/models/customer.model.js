@@ -80,23 +80,44 @@ const customerSchema = mongoose.Schema({
 
 const customerModel = mongoose.model('customer', customerSchema, 'Customer')
 
+/**
+ * GetAllCustomers is a function that takes a callback as an argument and returns all customers from
+ * the database.
+ * @param callback - The callback function that will be called when the query is complete.
+ */
 export const getAllCustomers = (callback) => {
     if (typeof callback !== 'function') throw new Error('callback is not a function')
     customerModel.find({}, callback)
 }
 
+/**
+ * GetCustomerById takes an id and a callback and returns a customer by id.
+ * @param id - The id of the customer you want to get
+ * @param callback - A function that will be called when the query is complete.
+ */
 export const getCustomerById = (id, callback) => {
     if (!id) throw new Error('Id is not defined')
     if (typeof callback !== 'function') throw new Error('callback is not a function')
     customerModel.findById(id, callback)
 }
 
+/**
+ * It creates a customer in the database
+ * @param data - The data to be inserted into the database.
+ * @param callback - A function that will be called when the operation is complete.
+ */
 export const createCustomer = (data, callback) => {
     if (!data) throw new Error('Data is not defined')
     if (typeof callback !== 'function') throw new Error('callback is not a function')
     customerModel.create(data, callback)
 }
 
+/**
+ * It updates a customer's data in the database
+ * @param id - The id of the customer you want to update.
+ * @param data - The data to be updated
+ * @param callback - A callback function that will be called after the update is complete.
+ */
 export const updateCustomer = (id, data, callback) => {
     if (!data || !id) throw new Error(' Id or data is not defined')
     if (typeof callback !== 'function') throw new Error('callback is not a function')
@@ -104,6 +125,11 @@ export const updateCustomer = (id, data, callback) => {
     customerModel.findByIdAndUpdate(id, data, callback)
 }
 
+/**
+ * It deletes a customer from the database by its id
+ * @param id - The id of the customer to be deleted.
+ * @param callback - A function that will be called when the operation is complete.
+ */
 export const deleteCustomer = (id, callback) => {
     if (!id) throw new Error(' Id is not defined')
     if (typeof callback !== 'function') throw new Error('callback is not a function')
@@ -111,6 +137,11 @@ export const deleteCustomer = (id, callback) => {
     customerModel.findByIdAndDelete(id, callback)
 }
 
+/**
+ * Find one customer in the database and return it to the callback function.
+ * @param filter - This is the filter object that you want to use to find the customer.
+ * @param callback - A function that will be called when the query is complete.
+ */
 export const findOneCustomer = (filter, callback) => {
     if (typeof callback !== 'function') throw new Error('callback is not a function')
 

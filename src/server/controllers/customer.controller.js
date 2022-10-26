@@ -14,6 +14,11 @@ import { statusCode, duplicatedCode } from '../enum/index.js'
 
 dotenv.config()
 
+/**
+ * It gets all the customers from the database and returns them in a JSON response
+ * @param req - The request object.
+ * @param res - The response object.
+ */
 const getCustomers = (req, res) => {
     getAllCustomers((err, data) => {
         if (err) {
@@ -32,6 +37,11 @@ const getCustomers = (req, res) => {
     })
 }
 
+/**
+ * It gets a customer by ID
+ * @param req - The request object.
+ * @param res - The response object.
+ */
 const getCustomerByID = (req, res) => {
     const id = req.params?.id
     if (!id) {
@@ -58,6 +68,11 @@ const getCustomerByID = (req, res) => {
     })
 }
 
+/**
+ * It creates a new customer
+ * @param req - The request object.
+ * @param res - The response object.
+ */
 const createCustomer = (req, res) => {
     const customer = req.body
     if (!customer) {
@@ -94,6 +109,12 @@ const createCustomer = (req, res) => {
     })
 }
 
+/**
+ * It updates a customer by id, if the customer is invalid, it returns a bad request, if the customer
+ * is valid, it updates the customer and returns a success message
+ * @param req - The request object.
+ * @param res - The response object.
+ */
 const updateCustomer = (req, res) => {
     const { id } = req.params
     const customer = req.body
@@ -127,6 +148,12 @@ const updateCustomer = (req, res) => {
 
 }
 
+/**
+ * It deletes a customer from the database
+ * @param req - The request object.
+ * @param res - The response object.
+ * @returns A function that takes in two parameters, req and res.
+ */
 const deleteCustomer = (req, res) => {
     const id = req.params?.id
     if (!id) {
@@ -154,6 +181,12 @@ const deleteCustomer = (req, res) => {
     })
 }
 
+/**
+ * It takes in a request and a response, and then it finds a customer by email and password, and if it
+ * finds one, it creates a token and sends it back to the client
+ * @param req - The request object.
+ * @param res - The response object.
+ */
 const login = (req, res) => {
     const { email, password } = req.body
 
