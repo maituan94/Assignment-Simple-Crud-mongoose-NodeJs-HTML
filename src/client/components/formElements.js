@@ -1,46 +1,52 @@
+import { getDateFormat } from '../js/validator/utils.js'
+
 /**
   * It takes a component object as an argument and returns a string of HTML that renders a form input
   * @param component - The component object
   */
-export const renderInput = (component) => `<!-- Create ${component.label} input --> <div class="bg-white px-4 mb-6">
-  <div class="form-control">
-    <label for="${component.id}" class="mb-1 block text-sm font-medium text-gray-700">
-      ${component.label}${component.isRequired ? '<span class="text-red-500">*</span>:' : ':'}
-    </label>
-    <input
-      id="${component.id}" 
-      type="${component.type}" 
-      name="${component.id}"
-      class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-      placeholder="${component.placeholder}"
-      pattern="${component.pattern}"
-      required=${component.isRequired}
-      ${component.min && `min=${component.min}`}
-      data-contact-form-error-id="${component.idError}" />
-    <div 
-      id="${component.idError}"
-      class="text-red-500 d-flex flex-column"
-    >
-      ${renderErrorMessage(component.errorMessage)}
+export const renderInput = (component) => `
+  <!-- Create ${component.label} input --> <div class="bg-white px-4 mb-6">
+    <div class="form-control">
+      <label for="${component.id}" class="mb-1 block text-sm font-medium text-gray-700">
+        ${component.label}${component.isRequired ? '<span class="text-red-500">*</span>:' : ':'}
+      </label>
+      <input
+        id="${component.id}" 
+        type="${component.type}" 
+        name="${component.id}"
+        class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        placeholder="${component.placeholder}"
+        pattern="${component.pattern}"
+        required=${component.isRequired}
+        ${component.min && `min=${component.min}`}
+        data-contact-form-error-id="${component.idError}" />
+      <div 
+        id="${component.idError}"
+        class="text-red-500 d-flex flex-column"
+      >
+        ${renderErrorMessage(component.errorMessage)}
+      </div>
     </div>
   </div>
-  </div>`
+`
 
 /**
  * It takes a component object as an argument, and returns a string of HTML that contains a label and a
  * series of radio buttons
  * @param component - The component object
  */
-export const renderRadioComponent = (component) => `<!-- Create ${component.label} input --> <div class="bg-white px-4 mb-6">
-  <div class="form-control ${component.id}">
-    <label for="${component.id}" class="mb-1 block text-sm font-medium text-gray-700">
-      ${component.label}
-    </label>
-    <div class="flex">
-    ${renderRadioOptions(component.options, component.id)}
+export const renderRadioComponent = (component) => `
+  <!-- Create ${component.label} input --> <div class="bg-white px-4 mb-6">
+    <div class="form-control ${component.id}">
+      <label for="${component.id}" class="mb-1 block text-sm font-medium text-gray-700">
+        ${component.label}
+      </label>
+      <div class="flex">
+      ${renderRadioOptions(component.options, component.id)}
+      </div>
     </div>
   </div>
-  </div>`
+`
 
 /**
  * It takes an array of options and a name, and returns a string of HTML that contains a radio button
@@ -73,28 +79,30 @@ export const renderRadioOptions = (options, name) => {
  * input
  * @param component - The component object
  */
-export const renderTexarea = (component) => `<!-- Create ${component.label} input --> <div class="bg-white px-4 mb-6">
-  <div class="form-control">
-    <label for="${component.id}" class="mb-1 block text-sm font-medium text-gray-700">
-      ${component.label}
-    </label>
-    <textarea
-      id="${component.id}" 
-      name="${component.id}"
-      class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-      placeholder="${component.placeholder}"
-      required=${component.isRequired}
-      ${component.rows && `rows="${component.rows}"`}
-      ${component.min && `min=${component.min}`}
-      data-contact-form-error-id="${component.idError}"></textarea>
-    <div 
-      id="${component.idError}"
-      class="text-red-500 d-flex flex-column"
-    >
-      ${renderErrorMessage(component.errorMessage)}
+export const renderTexarea = (component) => `
+  <!-- Create ${component.label} input --> <div class="bg-white px-4 mb-6">
+    <div class="form-control">
+      <label for="${component.id}" class="mb-1 block text-sm font-medium text-gray-700">
+        ${component.label}
+      </label>
+      <textarea
+        id="${component.id}" 
+        name="${component.id}"
+        class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        placeholder="${component.placeholder}"
+        required=${component.isRequired}
+        ${component.rows && `rows="${component.rows}"`}
+        ${component.min && `min=${component.min}`}
+        data-contact-form-error-id="${component.idError}"></textarea>
+      <div 
+        id="${component.idError}"
+        class="text-red-500 d-flex flex-column"
+      >
+        ${renderErrorMessage(component.errorMessage)}
+      </div>
     </div>
   </div>
-  </div>`
+`
 
 /**
  * It takes a component object as an argument and returns a string of HTML that represents a single
@@ -111,7 +119,8 @@ export const renderSingleCheckbox = (component) => `<!-- Create ${component.labe
       <label class="form-check-label inline-block text-gray-800" for="${component.label}">${component.label}</label>
     </div>
   </div>
-  </div>`
+  </div>
+`
 
 /**
  * It takes a component object as an argument, and returns a string of HTML that contains a select
@@ -137,7 +146,7 @@ export const renderSelect = (component) => `
     </div>
   </div>
   </div>
-  `
+`
 
 /**
  * It takes an object and returns a string of HTML options
@@ -151,6 +160,37 @@ const renderSelectOptions = (options) => {
   })
   return html
 }
+
+/**
+ * It takes a component object as an argument, and returns a string of HTML that contains a date
+ * input
+ * @param component - The component object
+ */
+export const renderDate = (component) => `
+  <!-- Create ${component.label} input -->
+  <div class="bg-white px-4 mb-6">
+    <div class="form-control">
+      <label for="${component.id}" class="mb-1 block text-sm font-medium text-gray-700">
+        ${component.label}${component.isRequired ? '<span class="text-red-500">*</span>:' : ':'}
+      </label>
+      <input
+        id="${component.id}" 
+        name="${component.id}"
+        type="${component.type}"
+        class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        required=${component.isRequired}
+        min=""
+        max="${getDateFormat()}"
+        data-contact-form-error-id="${component.idError}"></textarea>
+      <div 
+        id="${component.idError}"
+        class="text-red-500 d-flex flex-column"
+      >
+        ${renderErrorMessage(component.errorMessage)}
+      </div>
+    </div>
+  </div>
+`
 
 /**
  * It takes an object of error messages and returns a string of HTML

@@ -1,4 +1,11 @@
-import { renderInput, renderRadioComponent, renderSingleCheckbox, renderTexarea, renderSelect } from "../formElements.js"
+import {
+  renderInput,
+  renderRadioComponent,
+  renderSingleCheckbox,
+  renderTexarea,
+  renderSelect,
+  renderDate
+} from "../formElements.js"
 
 const provinces = {
   NL: 'Newfoundland and Labrador',
@@ -19,7 +26,7 @@ const provinces = {
 const customerElements = [
   [
     {
-      id: 'custFname',
+      id: 'firstName',
       label: 'First name',
       type: 'text',
       isRequired: true,
@@ -32,7 +39,7 @@ const customerElements = [
       }
     },
     {
-      id: 'custLname',
+      id: 'lastName',
       label: 'Last name',
       type: 'text',
       isRequired: true,
@@ -48,7 +55,7 @@ const customerElements = [
   ],
   [
     {
-      id: 'custEmail',
+      id: 'email',
       label: 'Email',
       type: 'text',
       isRequired: true,
@@ -59,11 +66,22 @@ const customerElements = [
         required: "This field is required",
         pattern: "Please insert a valid email"
       }
+    },
+    {
+      id: 'dateOfBirth',
+      label: 'Date of Birth',
+      type: 'date',
+      isRequired: true,
+      idError: 'contactErrorDateOfBirth',
+      errorMessage: {
+        required: "This field is required",
+        max: "The date value should lower"
+      }
     }
   ],
   [
     {
-      id: 'custPhone',
+      id: 'phone',
       label: 'Phone number',
       type: 'text',
       isRequired: true,
@@ -78,7 +96,7 @@ const customerElements = [
   ],
   [
     {
-      id: 'custPassword',
+      id: 'password',
       label: 'Password',
       type: 'password',
       isRequired: true,
@@ -92,7 +110,7 @@ const customerElements = [
       }
     },
     {
-      id: 'custConfirmPassword',
+      id: 'confirmPassword',
       label: 'Confirm password',
       type: 'password',
       isRequired: true,
@@ -108,7 +126,7 @@ const customerElements = [
   ],
   [
     {
-      id: 'custAddress',
+      id: 'address',
       label: 'Home address',
       type: 'text',
       isRequired: false,
@@ -118,7 +136,7 @@ const customerElements = [
       errorMessage: {}
     },
     {
-      id: 'custHomeNumber',
+      id: 'homeNumber',
       label: 'Home Number',
       type: 'text',
       isRequired: false,
@@ -128,8 +146,8 @@ const customerElements = [
       errorMessage: {}
     },
     {
-      id: 'custState',
-      label: 'Provinces',
+      id: 'state',
+      label: 'Province',
       type: 'select',
       isRequired: false,
       pattern: "",
@@ -141,7 +159,7 @@ const customerElements = [
   ],
   [
     {
-      id: 'custGender',
+      id: 'gender',
       label: 'Gender',
       type: 'radio',
       isRequired: false,
@@ -156,7 +174,7 @@ const customerElements = [
   ],
   [
     {
-      id: 'custQuestion',
+      id: 'question',
       label: 'What is your question?',
       type: 'textarea',
       isRequired: true,
@@ -169,7 +187,7 @@ const customerElements = [
   ],
   [
     {
-      id: 'custIsSendNews',
+      id: 'isSendNews',
       label: 'Send me monthly newsletter',
       type: 'checkbox',
       isRequired: false,
@@ -228,6 +246,9 @@ const renderComponent = (component) => {
 
   /* Checking if the component type is select, if it is, it will render the select component. */
   if (component.type === "select") return renderSelect(component)
+
+  /* Checking if the component type is select, if it is, it will render the select component. */
+  if (component.type === "date") return renderDate(component)
 
   /* Returning the renderInput function with the component as an argument. */
   return renderInput(component)

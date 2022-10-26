@@ -7,6 +7,8 @@
     <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
     <script defer type="module"src="./contactForm.js"></script>
 
+    <link rel="stylesheet" href="../../css/styles.css" />
+
     <title>EXAMPLE OF FORM WITH VALIDATIONS</title>
   </head>
   <body class="antialiased font-sans bg-gray-200 overflow-hidden">
@@ -27,11 +29,35 @@
                   <!-- Render Contact Form -->
                   <form 
                     id="contactForm"
-                    action="#"
+                    action="http://localhost:4000/api/customer"
+                    data-form-type="contact-form"
                     data-contact-form
                   >
-                    <!--  -->
                   </form>
+
+                  <div class="px-4 py-5">
+                    
+                    <!-- Error message element -->
+                    <div
+                      id="contact-form-alert"
+                      class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative hidden" 
+                      role="alert"
+                    >
+                    </div>
+                    
+                    <!-- Spinner element -->
+                    <div class="flex justify-center">
+                      <div
+                        id="contact-form-spinner"
+                        class="loader hidden"
+                        role="status"
+                      >
+                      </div>
+                    </div>
+
+                  </div>
+
+                  
                 </div>
 
               </div>
