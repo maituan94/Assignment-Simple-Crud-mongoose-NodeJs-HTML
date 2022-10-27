@@ -130,7 +130,10 @@ function Validator(form, selector = "validator", options = {}) {
 
   const handleOnFocus = (event) => {
     // Change background to yellow
-    event.target.style.background = backgroundInputColor;
+    const { srcElement: { nodeName } } = event
+    if (nodeName !== 'BUTTON') {
+      event.target.style.background = backgroundInputColor;
+    }
   }
 
   const handleOnBlur = (event) => {

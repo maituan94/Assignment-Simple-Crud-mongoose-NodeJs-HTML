@@ -180,7 +180,7 @@ export const renderDate = (component) => `
         class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         required=${component.isRequired}
         min=""
-        max="${getDateFormat()}"
+        max="${getDateFormat({ toShow: true })}"
         data-contact-form-error-id="${component.idError}"></textarea>
       <div 
         id="${component.idError}"

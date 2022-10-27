@@ -40,9 +40,15 @@ export const passwordNotMatch = (valueStr, type) => {
   }
 }
 
-export const getDateFormat = () => {
-  const date = new Date()
-  // @TODO Check the max value for date input
-  date.setDate(date.getDate() - 1)
-  return date.toLocaleDateString().split('T')[0]
+export const getDateFormat = ({ date, toShow = false }) => {
+  const newDate = date ? new Date(date) : new Date();
+  const month = newDate.getMonth() + 1;
+  const day = newDate.getDate() + 1;
+  const year = newDate.getFullYear();
+
+  if (toShow) {
+    return `${year}-${month}-${day}`;
+  }
+
+  return `${month}-${day}-${year}`;
 } 
