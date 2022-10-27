@@ -1,4 +1,5 @@
 import Validator from "../../js/validator/validator.js";
+import { getDateFormat } from "../../js/validator/utils.js";
 import renderFormElements from "./customerElements.js";
 
 window.onload = () => {
@@ -7,9 +8,14 @@ window.onload = () => {
   const selector = form.dataset.formType
 
   const sanitizeForm = (body) => {
+    const isSendNews = document.getElementById('isSendNews').checked;
+    const state = document.getElementById("state").value;
+
+    body['isSendNews'] = isSendNews
+    body['state'] = state
+
     if (body['dateOfBirth']) {
-      // @TODO Change format to DoB
-      body['dateOfBirth'] = '09-20-1969'
+      body['dateOfBirth'] = getDateFormat({ date: body['dateOfBirth'] })
     }
 
     delete body["confirmPassword"];
@@ -40,7 +46,7 @@ window.onload = () => {
     }
 
     // Hide alert while request is completed
-    hideAlert()
+    hideAlert(null, 'error')
 
     // Show spinner while request is completed
     showSpinner()
@@ -67,7 +73,7 @@ window.onload = () => {
 
   const checkData = (data) => {
     if (data && !data.error) {
-      console.log('User Created successfully');
+      showAlert('Customer Created Successfully', 'success')
     } else if (data && data.error) {
       showErrorMessage(data.error.message)
     }
@@ -86,19 +92,19 @@ window.onload = () => {
   }
 
   const showErrorMessage = (data) => {
-    showAlert(data)
+    showAlert(data, 'error')
     hideSpinner()
   }
 
-  const showAlert = (data) => {
-    const alert = document.getElementById(`${selector}-alert`)
+  const showAlert = (data, type) => {
+    const alert = document.getElementById(`${selector}-${type}-alert`)
     alert.innerHTML = data
     alert.classList.remove('hidden')
     alert.classList.add('block')
   }
 
-  const hideAlert = (data) => {
-    const alert = document.getElementById(`${selector}-alert`)
+  const hideAlert = (data, type) => {
+    const alert = document.getElementById(`${selector}-${type}-alert`)
     alert.innerHTML = data
     alert.classList.remove('block')
     alert.classList.add('hidden')

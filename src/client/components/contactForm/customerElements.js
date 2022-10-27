@@ -75,7 +75,7 @@ const customerElements = [
       idError: 'contactErrorDateOfBirth',
       errorMessage: {
         required: "This field is required",
-        max: "The date value should lower"
+        max: "The date value must be less than the current date"
       }
     }
   ],
@@ -106,7 +106,6 @@ const customerElements = [
       errorMessage: {
         required: "This field is required",
         pattern: "Please insert a valid password",
-        match: "Passwords do not match"
       }
     },
     {
