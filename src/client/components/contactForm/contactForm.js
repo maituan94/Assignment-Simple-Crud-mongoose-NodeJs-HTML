@@ -51,7 +51,6 @@ window.onload = () => {
     // Show spinner while request is completed
     showSpinner()
 
-    // If at least one checkbox is selected do fetch
     fetch(path, options)
       .then(errorHandler)
       .then(checkData)
@@ -74,6 +73,12 @@ window.onload = () => {
   const checkData = (data) => {
     if (data && !data.error) {
       showAlert('Customer Created Successfully', 'success')
+      setTimeout(() => {
+        // @ TODO check how can we redirect using relative paths
+        window.location.href = `/src/client/components/customerDetail/customerDetail.html?id=${data.data.id}`
+        // @TODO save JWT
+        sessionStorage.setItem("user-data", JSON.stringify(data.data));
+      }, 2000)
     } else if (data && data.error) {
       showErrorMessage(data.error.message)
     }

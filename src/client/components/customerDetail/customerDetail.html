@@ -1,0 +1,180 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- @TODO Move this scripts out using a preprocessor -->
+    <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+    <script defer type="module"src="./customerDetail.js"></script>
+
+
+    <title>EXAMPLE OF FORM WITH VALIDATIONS</title>
+  </head>
+  <body class="antialiased font-sans bg-gray-200 overflow-hidden">
+    
+    <div class="max-h-full overflow-y-auto">
+      <div class="bg-gray-100">
+        <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
+          <div class="mx-auto max-w-4xl">
+
+            <!-- @ TODO Refactor this view -->
+            <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Customer Details</h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details.</p>
+              </div>
+              <div class="border-t border-gray-200">
+
+                <div class="px-4 py-5">
+                  <div class="bg-white px-4 mb-6">
+                    <div class="form-control">
+                      <label
+                        for="id" 
+                        class="mb-1 block text-sm font-medium text-blue-700"
+                      >
+                        Customer ID:
+                      </label>
+                      <input
+                        id="id" 
+                        type="text" 
+                        class="text-blue-700 mb-1 w-full bg-gray-100 border-gray-300 shadow-sm focus:border-indigo-500
+                        focus:ring-indigo-500 sm:text-sm"
+                        disabled
+                        readonly
+                      />
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-4">
+                    <!-- First name input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="form-control">
+                        <label for="firstName" class="mb-1 block text-sm font-medium text-gray-700">
+                          First name:
+                        </label>
+                        <input
+                          id="firstName" 
+                          type="text" 
+                          class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          disabled
+                          readonly
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Last name input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="form-control">
+                        <label for="lastName" class="mb-1 block text-sm font-medium text-gray-700">
+                          Last name:
+                        </label>
+                        <input
+                          id="lastName" 
+                          type="text" 
+                          class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          disabled
+                          readonly
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-4">
+                    <!-- Email input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="form-control">
+                        <label for="firstName" class="mb-1 block text-sm font-medium text-gray-700">
+                          Email:
+                        </label>
+                        <input
+                          id="email"
+                          type="text" 
+                          class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          disabled
+                          readonly
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Date of birth input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="form-control">
+                        <label for="lastName" class="mb-1 block text-sm font-medium text-gray-700">
+                          Date of Birth:
+                        </label>
+                        <input
+                          id="dateOfBirth"
+                          type="text" 
+                          class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          disabled
+                          readonly
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-3 gap-4">
+                    <!-- Home address input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="form-control">
+                        <label for="firstName" class="mb-1 block text-sm font-medium text-gray-700">
+                          Home Address:
+                        </label>
+                        <input
+                          id="address"
+                          type="text" 
+                          class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          disabled
+                          readonly
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Home Number input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="form-control">
+                        <label for="lastName" class="mb-1 block text-sm font-medium text-gray-700">
+                          Home Number:
+                        </label>
+                        <input
+                          id="homeNumber"
+                          type="text" 
+                          class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          disabled
+                          readonly
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Province input -->
+                    <div class="bg-white px-4 mb-6">
+                      <div class="form-control">
+                        <label for="lastName" class="mb-1 block text-sm font-medium text-gray-700">
+                          Province:
+                        </label>
+                        <input
+                          id="state"
+                          type="text" 
+                          class="mb-1 w-full border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          disabled
+                          readonly
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <a 
+                    href="/src/client/components/contactForm/contactForm.html"
+                    class="px-4 mb-6 font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    < Back to Contact Form
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
